@@ -1,0 +1,9 @@
+[color]
+	ui = true
+[user]
+	name = Hao Wang
+	email = haow1990@gmail.com
+[http]
+	proxy = proxy.example.com:911
+[alias]
+	d = difftool
