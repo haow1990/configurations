@@ -1,12 +1,25 @@
 #!/bin/bash
 
-function lsnewest {
+# usage: doNewest cmd [options] [dir]
+# the last param will be treated as dir only if it doesn't start with -
+function doNewest() {
+  if [ $# -lt 1 ]; then
+    echo 'doNewest cmd [[options] [dir] >&2'
+  fi
+
+  cmd=$1
+  shift
+  while [[ "$1" == -* ]] || [[ $# -gt 1 ]]; do
+    cmd+=" $1"
+    shift
+  done
   dir=${1:-.}
   file=$(ls --sort=time $dir | head -n 1)
   if [[ -n $file ]]; then
-    echo $dir/$file
+    $cmd $dir/$file
   fi
 }
+
 
 # usage: doNewestFile cmd [options] [dir]
 # the last param will be treated as dir only if it doesn't start with -
@@ -52,6 +65,10 @@ function doNewestDir() {
       break
     fi
   done
+}
+
+function lsnewest {
+  doNewest ls $@
 }
 
 function catnewest {
