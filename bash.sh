@@ -1,57 +1,77 @@
 #!/bin/bash
 
 function lsnewest {
-  ls --sort=time $1 | head -n 1
+  dir=${1:-.}
+  file=$(ls --sort=time $dir | head -n 1)
+  if [[ -n $file ]]; then
+    echo $dir/$file
+  fi
 }
 
+# usage: doNewestFile cmd [options] [dir]
+# the last param will be treated as dir only if it doesn't start with -
 function doNewestFile() {
+  if [ $# -lt 1 ]; then
+    echo 'doNewestFile cmd [[options] [dir] >&2'
+  fi
+
   cmd=$1
   shift
-  until [[ $# -le 1 ]]; do
+  while [[ "$1" == -* ]] || [[ $# -gt 1 ]]; do
     cmd+=" $1"
     shift
   done
-  dir=$1
+  dir=${1:-.}
 
   for file in $(ls --sort=time $dir); do
-    if [[ -f $file ]]; then
-      $cmd $file
+    if [[ -f $dir/$file ]]; then
+      $cmd $dir/$file
       break
     fi
   done
 }
 
+# usage: doNewestDir cmd [options] [dir]
+# the last param will be treated as dir only if it doesn't start with -
 function doNewestDir() {
+  if [ $# -lt 1 ]; then
+    echo 'doNewestDir cmd [[options] [dir] >&2'
+  fi
+
   cmd=$1
   shift
-  until [[ $# -le 1 ]]; do
+  while [[ "$1" == -* ]] || [[ $# -gt 1 ]]; do
     cmd+=" $1"
     shift
   done
-  dir=$1
+  dir=${1:-.}
 
   for file in $(ls --sort=time $dir); do
-    if [[ -d $file ]]; then
-      $cmd $file
+    if [[ -d $dir/$file ]]; then
+      $cmd $dir/$file
       break
     fi
   done
 }
 
 function catnewest {
-  doNewestFile cat " $@"
+  doNewestFile cat $@
 }
 
 function vinewest {
-  doNewestFile vi " $@"
+  doNewestFile vi $@
 }
 
 function tailnewest {
-  doNewestFile tail -f " $@"
+  doNewestFile tail $@
 }
 
 function cdnewest {
-  doNewestDir cd " $@"
+  doNewestDir cd $@
+}
+
+function newestfile {
+  doNewestFile echo $@
 }
 
 export -f lsnewest
