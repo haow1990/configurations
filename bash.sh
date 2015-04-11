@@ -4,7 +4,7 @@
 # the last param will be treated as dir only if it doesn't start with -
 function doNewest() {
   if [ $# -lt 1 ]; then
-    echo 'doNewest cmd [[options] [dir] >&2'
+    echo 'doNewest cmd [[options] [dir]' >&2
   fi
 
   cmd=$1
@@ -25,7 +25,7 @@ function doNewest() {
 # the last param will be treated as dir only if it doesn't start with -
 function doNewestFile() {
   if [ $# -lt 1 ]; then
-    echo 'doNewestFile cmd [[options] [dir] >&2'
+    echo 'doNewestFile cmd [[options] [dir]' >&2
   fi
 
   cmd=$1
@@ -48,7 +48,7 @@ function doNewestFile() {
 # the last param will be treated as dir only if it doesn't start with -
 function doNewestDir() {
   if [ $# -lt 1 ]; then
-    echo 'doNewestDir cmd [[options] [dir] >&2'
+    echo 'doNewestDir cmd [[options] [dir]' >&2
   fi
 
   cmd=$1
