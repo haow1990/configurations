@@ -16,6 +16,7 @@ set wildmenu
 set wildmode=longest:full
 set nocompatible
 set fileencoding=utf8
+set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 set encoding=utf8
 set magic
 set ic
