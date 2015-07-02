@@ -19,6 +19,7 @@ set fileencoding=utf8
 set encoding=utf8
 set magic
 set ic
+set hlsearch
 
 " first search something, \z to fold anything else
 nnoremap \z :setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\\|\\|(getline(v:lnum+1)=~@/)?1:2 foldmethod=expr foldlevel=0 foldcolumn=2<CR>                                  
