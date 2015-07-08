@@ -91,9 +91,14 @@ function newestfile {
   doNewestFile echo $@
 }
 
+function numberStat() {
+  awk '{if(min=="")min=$1; if(max=="") max$1; if($1<min) min=$1; if($1>max)max=$1; sum+= $1; sum2+=$1*$1; cnt+=1}END{mean=sum/cnt; if(cnt>0) print "min: ",min, "\nmax: ", max, "\nmean:", mean, "\nSD:  ", sum2/cnt-mean*mean}'
+}
+
 export -f lsnewest
 export -f catnewest
 export -f vinewest
 export -f tailnewest
 export -f cdnewest
+export -f numberStat
 
