@@ -7,3 +7,7 @@
 	proxy = proxy.example.com:911
 [alias]
 	d = difftool
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
