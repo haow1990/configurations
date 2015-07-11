@@ -102,3 +102,6 @@ export -f tailnewest
 export -f cdnewest
 export -f numberStat
 
+# disable terminal flow control
+stty -ixon
+
